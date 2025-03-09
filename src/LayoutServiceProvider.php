@@ -15,7 +15,7 @@ class LayoutServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function register(): void
     {
-        $this->app->extend(ResponseFactory::class, 
+        $this->app->extend(ResponseFactory::class,
             fn (ResponseFactory $factory) => new LayoutResponseFactory($factory)
         );
     }
@@ -28,7 +28,7 @@ class LayoutServiceProvider extends ServiceProvider implements DeferrableProvide
     public function provides(): array
     {
         return [
-            LayoutResponseFactory::class
+            LayoutResponseFactory::class,
         ];
     }
 }

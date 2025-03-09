@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Honed\Layout;
 
-use Inertia\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response as ResponseFactory;
 use Illuminate\Support\Str;
+use Inertia\Response;
 use Inertia\Support\Header;
 
 class LayoutResponse extends Response
 {
     /**
      * The persistent layouts to use for the response.
-     * 
+     *
      * @var string|array<int,string>|null
      */
     protected $layout;
 
     /**
      * Set the persistent layouts to use for the response.
-     * 
+     *
      * @param  string|array<int,string>|null  $layout
      */
     public function layout($layout)
@@ -31,7 +31,7 @@ class LayoutResponse extends Response
         return $this;
     }
 
-        /**
+    /**
      * Create an HTTP response that represents the object.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -62,5 +62,4 @@ class LayoutResponse extends Response
 
         return ResponseFactory::view($this->rootView, $this->viewData + ['page' => $page]);
     }
-
 }
