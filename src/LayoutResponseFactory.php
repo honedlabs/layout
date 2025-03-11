@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Honed\Layout;
 
-use Illuminate\Contracts\Support\Arrayable;
 use Inertia\ResponseFactory;
+use Illuminate\Contracts\Support\Arrayable;
 
 class LayoutResponseFactory extends ResponseFactory
 {
