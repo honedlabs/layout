@@ -5,20 +5,22 @@ declare(strict_types=1);
 namespace Honed\Layout;
 
 use Illuminate\Contracts\Support\Arrayable;
-use Inertia\ResponseFactory;
+use Inertia\ResponseFactory as InertiaResponseFactory;
 
-class LayoutResponseFactory extends ResponseFactory
+class ResponseFactory extends InertiaResponseFactory
 {
     /**
-     * @param  array|Arrayable  $props
+     * Render the response.
+     *
+     * @param  array<string,mixed>|\Illuminate\Contracts\Support\Arrayable<string,mixed>  $props
      */
-    public function render(string $component, $props = []): LayoutResponse
+    public function render(string $component, $props = []): Response
     {
         if ($props instanceof Arrayable) {
             $props = $props->toArray();
         }
 
-        return new LayoutResponse(
+        return new Response(
             $component,
             array_merge($this->sharedProps, $props),
             $this->rootView,

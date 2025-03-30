@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Honed\Layout;
 
+use Honed\Layout\Support\Parameters;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response as ResponseFactory;
 use Illuminate\Support\Str;
-use Inertia\Response;
+use Inertia\Response as InertiaResponse;
 use Inertia\Support\Header;
 
-class LayoutResponse extends Response
+class Response extends InertiaResponse
 {
     /**
      * The persistent layouts to use for the response.
@@ -20,15 +21,26 @@ class LayoutResponse extends Response
     protected $layout;
 
     /**
-     * Set the persistent layouts to use for the response.
+     * Set the persistent layout(s) for the response.
      *
-     * @param  string|array<int,string>|null  $layout
+     * @param  string|array<int,string>  $layout
+     * @return $this
      */
     public function layout($layout)
     {
         $this->layout = $layout;
 
         return $this;
+    }
+
+    /**
+     * Get the persistent layout(s) for the response.
+     *
+     * @return string|array<int,string>|null
+     */
+    public function getLayout()
+    {
+        return $this->layout;
     }
 
     /**
@@ -44,7 +56,7 @@ class LayoutResponse extends Response
         $page = array_merge(
             [
                 'component' => $this->component,
-                'layout' => $this->layout,
+                Parameters::PROP => $this->getLayout(),
                 'props' => $props,
                 'url' => Str::start(Str::after($request->fullUrl(), $request->getSchemeAndHttpHost()), '/'),
                 'version' => $this->version,
