@@ -52,6 +52,7 @@ class AssertableInertia extends InertiaAssert
         // @phpstan-ignore-next-line
         $page = \json_decode(\json_encode($response->viewData('page')), true);
 
+        /** @phpstan-ignore-next-line */
         [$component, $layout] = Response::parseComponent(Arr::get($page, 'component'));
 
         $instance->component = $component;

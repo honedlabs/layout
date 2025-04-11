@@ -11,6 +11,8 @@ use Illuminate\Support\Str;
 use Inertia\Response as InertiaResponse;
 use Inertia\Support\Header;
 
+use function Illuminate\Support\enum_value;
+
 class Response extends InertiaResponse
 {
     const FORMATTER = '@';
@@ -25,11 +27,14 @@ class Response extends InertiaResponse
     /**
      * Set the persistent layout(s) for the response.
      *
-     * @param  string  $layout
+     * @param  string|\BackedEnum|\UnitEnum  $layout
      * @return $this
      */
     public function layout($layout)
     {
+        /** @var string */
+        $layout = enum_value($layout);
+
         $this->layout = $layout;
 
         return $this;
@@ -96,7 +101,9 @@ class Response extends InertiaResponse
      */
     public static function parseComponent($component)
     {
-        return \explode(self::FORMATTER, $component, 2);
+        $parts = \explode(self::FORMATTER, $component, 2);
+
+        return [$parts[0], $parts[1] ?? null];
     }
 
     /**
