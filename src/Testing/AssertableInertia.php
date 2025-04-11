@@ -7,8 +7,8 @@ namespace Honed\Layout\Testing;
 use Honed\Layout\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Testing\TestResponse;
-use PHPUnit\Framework\Assert as PHPUnit;
 use Inertia\Testing\AssertableInertia as InertiaAssert;
+use PHPUnit\Framework\Assert as PHPUnit;
 
 class AssertableInertia extends InertiaAssert
 {
@@ -21,7 +21,7 @@ class AssertableInertia extends InertiaAssert
 
     /**
      * Change the visibility of the component.
-     * 
+     *
      * @var string
      */
     protected $component;
@@ -53,7 +53,7 @@ class AssertableInertia extends InertiaAssert
         $page = \json_decode(\json_encode($response->viewData('page')), true);
 
         [$component, $layout] = Response::parseComponent(Arr::get($page, 'component'));
-        
+
         $instance->component = $component;
         $instance->layout = $layout;
 
